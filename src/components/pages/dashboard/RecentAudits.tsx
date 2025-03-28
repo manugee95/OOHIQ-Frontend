@@ -50,7 +50,7 @@ export default function RecentAudits() {
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
+						<tr className="border-b border-b-[#B7B7B7]">
 							<td>
 								<div className="flex items-center gap-5 p-5">
 									<Image
@@ -75,17 +75,35 @@ export default function RecentAudits() {
 								</div>
 							</td>
 							<td>
-								<div className="p-5 w-[170px]">
-									<span className="line-clamp-2 font-medium text-2xl text-secondary">
+								<div className="p-5">
+									<span className="font-medium text-2xl text-secondary">
 										LED
 									</span>
 								</div>
 							</td>
 							<td>
-								<div className="p-5 w-[170px]">
+								<div className="p-5">
 									<AppButton
-										className="!bg-[#1AED0830] w-[108px] !text-[#096102"
+										className="!bg-[#1AED0830] !w-[108px] !text-[#096102] border-[#096102] border"
 										label="Passed"
+									/>
+								</div>
+							</td>
+							<td>
+								<div className="p-5 w-[170px]">
+									<div className="p-5">
+										<span className="line-clamp-2 font-medium text-2xl text-secondary">
+											27 Jan, 2024
+										</span>
+									</div>
+								</div>
+							</td>
+							<td>
+								<div className="p-5">
+									<AppButton
+										fullyRounded
+										className="!bg-[#3DF3A92B] !w-[108px] !text-secondary border-primary border"
+										label="View"
 									/>
 								</div>
 							</td>
