@@ -14,7 +14,7 @@ export async function middleware(request: NextRequest) {
 			throw new Error("Unauthenticated");
 		}
 
-		const res = await ApiInstance.get("/user/detail");
+		await ApiInstance.get("/user/detail");
 
 		if (isAuthRoute) {
 			return response.redirect(new URL("/", request.url));

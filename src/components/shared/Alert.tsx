@@ -23,7 +23,7 @@ export default function Alert() {
 					}`}>
 					<div
 						className={`w-[35px] h-[35px] rounded-full flex items-center justify-center  ${
-							isSuccess ? "bg-[#048F2B]" : "bg-primary"
+							isSuccess ? "bg-[#048F2B]" : "bg-red-500"
 						}`}>
 						<CautionIcon />
 					</div>

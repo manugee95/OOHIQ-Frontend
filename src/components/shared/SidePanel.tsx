@@ -41,8 +41,8 @@ export const SidePanelContent = function ({ cb }: { cb?: () => void }) {
 			<div className="flex items-center gap-x-5 mb-12">
 				<Image
 					src={"/oohiq-logo.png"}
-					width={40}
-					height={40}
+					width={70}
+					height={70}
 					alt="oohiq-logo"
 				/>
 			</div>

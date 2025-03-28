@@ -35,7 +35,7 @@ export default async function RootLayout({
 						shadow="0 0 10px #3df3a9,0 0 5px #3df3a9"
 					/>
 					<Alert />
-					<main className="bg-[#F4F4F4] flex flex-col lg:flex-row">
+					<main className="bg-[#F4F4F4] flex flex-col lg:flex-row w-full">
 						<SidePanel />
 						<section className="grow">
 							<DashboardHeader />

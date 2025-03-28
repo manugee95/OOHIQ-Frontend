@@ -9,6 +9,7 @@ import Image from "next/image";
 import useAlert from "@/hooks/useAlert";
 import AppLoader from "./AppLoader";
 import { ApiInstance } from "@/utils";
+import { AxiosError } from "axios";
 
 export default function DashboardHeader() {
 	const pathname = usePathname();
@@ -61,8 +62,15 @@ export default function DashboardHeader() {
 			setIsUploading(false);
 			setFile(null);
 		} catch (error) {
-			// @ts-ignore
-			showAndHideAlert({ message: error.message, type: "error" });
+			const err = error as AxiosError<any>;
+
+			showAndHideAlert({
+				message:
+					err?.response?.data?.error ??
+					err?.response?.data?.message ??
+					"An error occurred! Try again or check internet connection",
+				type: "error",
+			});
 
 			setIsUploading(false);
 			setFile(null);
@@ -76,7 +84,7 @@ export default function DashboardHeader() {
 	}, [file]);
 
 	return (
-		<header className="h-[80px] w-full flex items-center justify-between px-[15px]">
+		<header className="h-[100px] w-full flex items-center justify-between px-[15px]">
 			<h1 className="font-bold text-[3.6rem]">{isDashboard && "Dashboard"}</h1>
 			<h1 className="font-bold text-[3.6rem]">{isAudits && "Audits"}</h1>
 			<h1 className="font-bold text-[3.6rem]">
