@@ -7,8 +7,9 @@ import { useQuery } from "@tanstack/react-query";
 import { ApiInstance } from "@/utils";
 import { Audit } from "@/types";
 import Pagination from "@/components/shared/Pagination";
+import AuditTableActions from "./AuditTableActions";
 
-export default function RecentAudits() {
+export default function AuditsTable() {
 	const [currentPage, setCurrentPage] = useState(1);
 	const { data, isLoading } = useQuery({
 		queryKey: ["audits", currentPage],
@@ -22,16 +23,7 @@ export default function RecentAudits() {
 
 	return (
 		<div className="overflow-hidden w-full min-h-[70vh] rounded-2xl bg-white mt-8 flex flex-col">
-			<div className="flex items-center justify-between p-8">
-				<span className="text-[2rem] font-semibold text-textBlack">
-					Recent Audits
-				</span>
-				<Link
-					href={"/audits"}
-					className="text-2xl font-medium text-textBlack underline">
-					View all
-				</Link>
-			</div>
+			<AuditTableActions reports={[]} />
 			<div className="w-full grow overflow-auto">
 				<table className="w-full">
 					<thead className="border-b border-t border-[#C7C7C7] border-t-[#C7C7C7] bg-[#F7F7F7]">
@@ -180,13 +172,13 @@ export default function RecentAudits() {
 					</tbody>
 				</table>
 			</div>
-			{/* <div className="p-10">
+			<div className="p-10">
 				<Pagination
 					currentPage={currentPage}
 					totalPages={data?.totalPages}
 					setCurrentPage={setCurrentPage}
 				/>
-			</div> */}
+			</div>
 		</div>
 	);
 }

@@ -17,3 +17,23 @@ export type UserLevel =
 	| "Contender"
 	| "Professional"
 	| "Ultimate";
+
+export interface Audit {
+	advertiserId: number;
+	billboardType: { name: string };
+	billboardTypeId: number;
+	brand: string;
+	brandIdentifier: string;
+	categoryId: number;
+	closeShotUrl: string;
+	createdAt: Date;
+	id: number;
+	industryId: number;
+	location: string;
+	longShotUrl: string;
+	status: string;
+	updatedAt: Date;
+	user: User;
+	userId: number;
+	videoUrl: string;
+}

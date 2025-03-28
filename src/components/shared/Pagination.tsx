@@ -50,7 +50,7 @@ export default function Pagination({
 					onClick={() => d !== "..." && setCurrentPage(d)}
 					className={`${
 						currentPage === d
-							? "bg-primary text-white"
+							? "bg-primary text-secondary"
 							: "bg-[#f2f2f2] text-appBlack"
 					}  w-[35px] h-[35px] rounded-lg flex items-center justify-center`}>
 					<span className="text-2xl font-medium ">{d}</span>

@@ -8,7 +8,7 @@ import { ApiInstance } from "@/utils";
 import { Audit } from "@/types";
 import Pagination from "@/components/shared/Pagination";
 
-export default function RecentAudits() {
+export default function WithdrawalList() {
 	const [currentPage, setCurrentPage] = useState(1);
 	const { data, isLoading } = useQuery({
 		queryKey: ["audits", currentPage],
@@ -22,15 +22,19 @@ export default function RecentAudits() {
 
 	return (
 		<div className="overflow-hidden w-full min-h-[70vh] rounded-2xl bg-white mt-8 flex flex-col">
-			<div className="flex items-center justify-between p-8">
-				<span className="text-[2rem] font-semibold text-textBlack">
-					Recent Audits
-				</span>
-				<Link
-					href={"/audits"}
-					className="text-2xl font-medium text-textBlack underline">
-					View all
-				</Link>
+			<div className="h-[71px] bg-white flex gap-5 w-max items-center p-5 rounded-2xl">
+				<AppButton
+					label="All"
+					className="!w-max !h-[52px] px-[40px] !text-secondary"
+				/>
+				<AppButton
+					label="Pending"
+					className="!w-max !h-[52px] px-[40px] !text-secondary !bg-[#EBEBEB]"
+				/>
+				<AppButton
+					label="Approved"
+					className="!w-max !h-[52px] px-[40px] !text-secondary !bg-[#EBEBEB]"
+				/>
 			</div>
 			<div className="w-full grow overflow-auto">
 				<table className="w-full">
@@ -43,22 +47,22 @@ export default function RecentAudits() {
 							</th>
 							<th>
 								<span className="text-2xl font-semibold text-[#B0B0B0] p-5 flex">
-									Location
+									Bank
 								</span>
 							</th>
 							<th>
 								<span className="text-2xl font-semibold text-[#B0B0B0] p-5 flex">
-									Billboard Type
+									Date
 								</span>
 							</th>
 							<th className="text-center">
 								<span className="text-2xl font-semibold text-[#B0B0B0] p-5 flex">
-									Status
+									Amount
 								</span>
 							</th>
 							<th>
 								<span className="text-2xl font-semibold text-[#B0B0B0] p-5 flex">
-									Date Uploaded
+									Status
 								</span>
 							</th>
 							<th className="text-right"></th>
@@ -85,15 +89,15 @@ export default function RecentAudits() {
 											</div>
 										</td>
 										<td>
-											<div className="p-5">
-												<div className="bg-[#eaeaea] animate-pulse w-[109px] h-[50px] rounded-full object-cover object-top"></div>
-											</div>
-										</td>
-										<td>
 											<div className="p-5 w-[170px]">
 												<div className="p-5">
 													<div className="w-[80px] rounded-full h-[5px] bg-[#eaeaea] animate-pulse"></div>
 												</div>
+											</div>
+										</td>
+										<td>
+											<div className="p-5">
+												<div className="bg-[#eaeaea] animate-pulse w-[109px] h-[50px] rounded-full object-cover object-top"></div>
 											</div>
 										</td>
 										<td>
@@ -122,15 +126,29 @@ export default function RecentAudits() {
 										<td>
 											<div className="p-5 w-[170px]">
 												<span className="line-clamp-2 font-medium text-2xl text-secondary">
-													{d.location}
+													00455995409 Raphael Ajayi, GT Bank
 												</span>
 											</div>
 										</td>
 										<td>
 											<div className="p-5">
 												<span className="font-medium text-2xl text-secondary">
-													{d.billboardType.name}
+													{new Date(d.createdAt).toLocaleDateString("en-US", {
+														month: "short",
+														day: "2-digit",
+														year: "numeric",
+													})}
 												</span>
+											</div>
+										</td>
+
+										<td>
+											<div className="p-5 w-[170px]">
+												<div className="p-5">
+													<span className="line-clamp-2 font-medium text-2xl text-secondary">
+														N25,000
+													</span>
+												</div>
 											</div>
 										</td>
 										<td>
@@ -150,28 +168,16 @@ export default function RecentAudits() {
 															: ""
 													} !w-[108px]   border`}
 													label={d.status}
+													fullyRounded
 												/>
-											</div>
-										</td>
-										<td>
-											<div className="p-5 w-[170px]">
-												<div className="p-5">
-													<span className="line-clamp-2 font-medium text-2xl text-secondary">
-														{new Date(d.createdAt).toLocaleDateString("en-US", {
-															month: "short",
-															day: "2-digit",
-															year: "numeric",
-														})}
-													</span>
-												</div>
 											</div>
 										</td>
 										<td>
 											<div className="p-5">
 												<AppButton
 													fullyRounded
-													className="!bg-[#3DF3A92B] !w-[108px] !text-secondary border-primary border"
-													label="View"
+													className=" !w-[108px] !text-secondary border-primary border"
+													label="Approve"
 												/>
 											</div>
 										</td>
@@ -180,13 +186,13 @@ export default function RecentAudits() {
 					</tbody>
 				</table>
 			</div>
-			{/* <div className="p-10">
+			<div className="p-10">
 				<Pagination
 					currentPage={currentPage}
 					totalPages={data?.totalPages}
 					setCurrentPage={setCurrentPage}
 				/>
-			</div> */}
+			</div>
 		</div>
 	);
 }

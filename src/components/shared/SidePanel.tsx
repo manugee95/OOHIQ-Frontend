@@ -89,7 +89,7 @@ export const SidePanelContent = function ({ cb }: { cb?: () => void }) {
 							cb();
 						}
 					}}
-					href={"/audits"}
+					href={"/withdrawals"}
 					className={`flex items-center gap-5 h-[40px] rounded-lg px-5 ${
 						isWithdrawals ? "bg-primary" : "bg-transparent"
 					}`}>

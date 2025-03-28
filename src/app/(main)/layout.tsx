@@ -31,8 +31,8 @@ export default async function RootLayout({
 			<body className={`${barlow.variable} font-barlow antialiased`}>
 				<RootProvider user={res.data ?? null}>
 					<NextTopLoader
-						color="#3df3a9"
-						shadow="0 0 10px #3df3a9,0 0 5px #3df3a9"
+						color="#00100a"
+						shadow="0 0 10px #00100a,0 0 5px #00100a"
 					/>
 					<Alert />
 					<main className="bg-[#F4F4F4] flex flex-col lg:flex-row w-full">

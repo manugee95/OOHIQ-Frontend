@@ -85,15 +85,13 @@ export default function DashboardHeader() {
 
 	return (
 		<header className="h-[100px] w-full flex items-center justify-between px-[15px]">
-			<h1 className="font-bold text-[3.6rem]">{isDashboard && "Dashboard"}</h1>
-			<h1 className="font-bold text-[3.6rem]">{isAudits && "Audits"}</h1>
 			<h1 className="font-bold text-[3.6rem]">
+				{isDashboard && "Dashboard"}
+				{isAudits && "Audits"}
 				{isAuditors && "Field Auditors"}
-			</h1>
-			<h1 className="font-bold text-[3.6rem]">
 				{isWithdrawals && "Withdrawals"}
+				{isLocations && "Locations"}
 			</h1>
-			<h1 className="font-bold text-[3.6rem]">{isLocations && "Locations"}</h1>
 			<Dropdown
 				renderButton={({ setOpen, open }) => (
 					<button className="h-[50px]" onClick={() => setOpen(!open)}>
