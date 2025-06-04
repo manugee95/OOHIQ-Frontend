@@ -109,7 +109,7 @@ export default function DashboardHeader() {
 				{isAudits && "Audits"}
 				{isAuditors && "Field Auditors"}
 				{isWithdrawals && "Withdrawals"}
-				{isLocations && "Locations"}
+				{isLocations && "Boards"}
 			</h1>
 			<div className="flex items-center gap-12">
 				<Dropdown
