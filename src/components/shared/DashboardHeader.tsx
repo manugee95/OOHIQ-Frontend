@@ -57,7 +57,7 @@ export default function DashboardHeader() {
 				file?.name
 			);
 
-			const res = await ApiInstance.put("/user/" + userDetails?.id, data, {
+			const res = await ApiInstance.put("/api/user", data, {
 				headers: {
 					"Content-Type": "multipart/form-data",
 				},
