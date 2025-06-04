@@ -52,7 +52,7 @@ const RootProvider = ({
 	children,
 	user = null,
 	countries = [],
-}: PropsWithChildren & { user?: User | null; countries: Country[] }) => {
+}: PropsWithChildren & { user?: User | null; countries?: Country[] }) => {
 	const rootStoreRef = useRef<StoreApi<RootStore> | null>(null);
 	rootStoreRef.current = createRootStore(user, countries);
 
