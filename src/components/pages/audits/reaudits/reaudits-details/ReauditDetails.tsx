@@ -61,6 +61,19 @@ export default function ReauditDetails() {
 		}
 	}
 
+	const objectCounts = Object.keys(
+		currentReaudit?.data?.objectCounts ?? {}
+	).filter((k, i) => {
+		const isTargetWord =
+			k.includes("car") ||
+			k.includes("person") ||
+			k.includes("truck") ||
+			k.includes("motorcycle") ||
+			k.includes("bus");
+
+		return isTargetWord;
+	});
+
 	return (
 		<>
 			<div className="flex items-center justify-between mb-12">
@@ -168,7 +181,7 @@ export default function ReauditDetails() {
 						<div className="px-5 py-6 flex flex-col gap-2 border-b border-b-[#E3E3E3]">
 							<span className="text-3xl font-medium">Billboard Type</span>
 							<span className="text-2xl text-[#6D706F">
-								{currentReaudit?.data.billboardType?.name ?? "N/A"}
+								{currentReaudit?.data.billboardTypeName ?? "N/A"}
 							</span>
 						</div>
 						<div className="px-5 py-6 flex flex-col gap-2 border-b border-b-[#E3E3E3]">
@@ -210,13 +223,13 @@ export default function ReauditDetails() {
 						<div className="px-5 py-6 flex flex-col gap-2 border-b border-b-[#E3E3E3]">
 							<span className="text-3xl font-medium">Industry</span>
 							<span className="text-2xl text-[#6D706F]">
-								{currentReaudit?.data.industry?.name}
+								{currentReaudit?.data.industryName}
 							</span>
 						</div>
 						<div className="px-5 py-6 flex flex-col gap-2 border-b border-b-[#E3E3E3]">
 							<span className="text-3xl font-medium">Advertiser</span>
 							<span className="text-2xl text-[#6D706F">
-								{currentReaudit?.data.advertiser?.name ?? "N/A"}
+								{currentReaudit?.data.advertiserName ?? "N/A"}
 							</span>
 						</div>
 						<div className="px-5 py-6 flex flex-col gap-2 border-b border-b-[#E3E3E3]">
@@ -228,25 +241,25 @@ export default function ReauditDetails() {
 						<div className="px-5 py-6 flex flex-col gap-2 border-b border-b-[#E3E3E3]">
 							<span className="text-3xl font-medium">Board Condition</span>
 							<span className="text-2xl text-[#6D706F">
-								{currentReaudit?.data.boardCondition?.name ?? "N/A"}
+								{currentReaudit?.data.boardConditionName ?? "N/A"}
 							</span>
 						</div>
 						<div className="px-5 py-6 flex flex-col gap-2 border-b border-b-[#E3E3E3]">
 							<span className="text-3xl font-medium">Poster Condition</span>
 							<span className="text-2xl text-[#6D706F">
-								{currentReaudit?.data.posterCondition?.name ?? "N/A"}
+								{currentReaudit?.data.posterConditionName ?? "N/A"}
 							</span>
 						</div>
 						<div className="px-5 py-6 flex flex-col gap-2 border-b border-b-[#E3E3E3]">
 							<span className="text-3xl font-medium">Traffic Speed</span>
 							<span className="text-2xl text-[#6D706F">
-								{currentReaudit?.data.trafficSpeed?.name ?? "N/A"}
+								{currentReaudit?.data.trafficSpeedName ?? "N/A"}
 							</span>
 						</div>
 						<div className="px-5 py-6 flex flex-col gap-2 border-b border-b-[#E3E3E3]">
 							<span className="text-3xl font-medium">Evaluation Time</span>
 							<span className="text-2xl text-[#6D706F">
-								{currentReaudit?.data.evaluationTime?.name ?? "N/A"}
+								{currentReaudit?.data.evaluationTimeName ?? "N/A"}
 							</span>
 						</div>
 						<div className="px-5 py-6 flex flex-col gap-2 border-b border-b-[#E3E3E3]">
@@ -255,22 +268,53 @@ export default function ReauditDetails() {
 								{currentReaudit?.data.impressionScore}
 							</span>
 						</div>
+						<div className="px-5 py-6 flex flex-col gap-2 ">
+							<span className="text-3xl font-medium">SOV Score</span>
+							<span className="text-2xl text-[#6D706F]">
+								{currentReaudit?.audit?.sovScore ?? "N/A"}
+							</span>
+						</div>
+						<div className="px-5 py-6 flex flex-col gap-2 ">
+							<span className="text-3xl font-medium">LTS Score</span>
+							<span className="text-2xl text-[#6D706F]">
+								{currentReaudit?.audit?.billboardEvaluation?.ltsScore ?? "N/A"}
+							</span>
+						</div>
+						<div className="px-5 py-6 flex flex-col gap-2 ">
+							<span className="text-3xl font-medium">Site Score</span>
+							<span className="text-2xl text-[#6D706F]">
+								{currentReaudit?.audit?.billboardEvaluation?.siteScore ?? "N/A"}
+							</span>
+						</div>
+						<div className="px-5 py-6 flex flex-col gap-2 ">
+							<span className="text-3xl font-medium">Site Grade</span>
+							<span className="text-2xl text-[#6D706F]">
+								{currentReaudit?.audit?.billboardEvaluation?.siteGrade ?? "N/A"}
+							</span>
+						</div>
 					</div>
 					<div className=" bg-white rounded-2xl flex flex-col">
 						<div className="px-5 py-6 flex flex-col gap-2">
 							<span className="text-3xl font-medium">Object Counts</span>
 							<div className="flex flex-col mt-5">
-								{Object.keys(currentReaudit?.data.objectCounts ?? {}).map(
-									(k, i) => (
-										<div
-											key={i}
-											className="flex items-center justify-between py-5 border-b border-b-[#E3E3E3] last:border-b-0">
-											<span className="text-2xl font-medium">{k}</span>
-											<span className="text-2xl text-[#6D706F] font-medium">
-												{currentReaudit?.data.objectCounts[k]}
-											</span>
-										</div>
-									)
+								{objectCounts.length > 0 &&
+									objectCounts.map((k, i) => {
+										return (
+											<div
+												key={i}
+												className="flex items-center justify-between py-5 border-b border-b-[#E3E3E3] last:border-b-0">
+												<span className="text-2xl font-medium">{k}</span>
+												<span className="text-2xl text-[#6D706F] font-medium">
+													{currentReaudit?.data?.objectCounts[k]}
+												</span>
+											</div>
+										);
+									})}
+
+								{objectCounts.length === 0 && (
+									<span className="text-2xl text-[#6D706F] font-medium">
+										No Match Found!
+									</span>
 								)}
 							</div>
 						</div>

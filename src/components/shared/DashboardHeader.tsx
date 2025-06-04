@@ -57,7 +57,7 @@ export default function DashboardHeader() {
 				file?.name
 			);
 
-			const res = await ApiInstance.put("/user/" + userDetails?.id, data, {
+			const res = await ApiInstance.put("/api/user", data, {
 				headers: {
 					"Content-Type": "multipart/form-data",
 				},
@@ -109,7 +109,7 @@ export default function DashboardHeader() {
 				{isAudits && "Audits"}
 				{isAuditors && "Field Auditors"}
 				{isWithdrawals && "Withdrawals"}
-				{isLocations && "Locations"}
+				{isLocations && "Boards"}
 			</h1>
 			<div className="flex items-center gap-12">
 				<Dropdown

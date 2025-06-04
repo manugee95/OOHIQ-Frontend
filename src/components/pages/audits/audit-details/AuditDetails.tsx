@@ -58,6 +58,19 @@ export default function AuditDetails() {
 		}
 	}
 
+	const objectCounts = Object.keys(currentAudit?.objectCounts ?? {}).filter(
+		(k, i) => {
+			const isTargetWord =
+				k.includes("car") ||
+				k.includes("person") ||
+				k.includes("truck") ||
+				k.includes("motorcycle") ||
+				k.includes("bus");
+
+			return isTargetWord;
+		}
+	);
+
 	return (
 		<>
 			<div className="flex items-center justify-between mb-12">
@@ -161,6 +174,24 @@ export default function AuditDetails() {
 							</span>
 						</div>
 						<div className="px-5 py-6 flex flex-col gap-2 border-b border-b-[#E3E3E3]">
+							<span className="text-3xl font-medium">State</span>
+							<span className="text-2xl text-[#6D706F]">
+								{currentAudit?.state}
+							</span>
+						</div>
+						<div className="px-5 py-6 flex flex-col gap-2 border-b border-b-[#E3E3E3]">
+							<span className="text-3xl font-medium">Town</span>
+							<span className="text-2xl text-[#6D706F]">
+								{currentAudit?.town}
+							</span>
+						</div>
+						<div className="px-5 py-6 flex flex-col gap-2 border-b border-b-[#E3E3E3]">
+							<span className="text-3xl font-medium">Country</span>
+							<span className="text-2xl text-[#6D706F]">
+								{currentAudit?.country}
+							</span>
+						</div>
+						<div className="px-5 py-6 flex flex-col gap-2 border-b border-b-[#E3E3E3]">
 							<span className="text-3xl font-medium">Billboard Type</span>
 							<span className="text-2xl text-[#6D706F]">
 								{currentAudit?.billboardType.name}
@@ -256,21 +287,48 @@ export default function AuditDetails() {
 								{currentAudit?.sovScore ?? "N/A"}
 							</span>
 						</div>
+						<div className="px-5 py-6 flex flex-col gap-2 ">
+							<span className="text-3xl font-medium">LTS Score</span>
+							<span className="text-2xl text-[#6D706F]">
+								{currentAudit?.billboardEvaluation?.ltsScore ?? "N/A"}
+							</span>
+						</div>
+						<div className="px-5 py-6 flex flex-col gap-2 ">
+							<span className="text-3xl font-medium">Site Score</span>
+							<span className="text-2xl text-[#6D706F]">
+								{currentAudit?.billboardEvaluation?.siteScore ?? "N/A"}
+							</span>
+						</div>
+						<div className="px-5 py-6 flex flex-col gap-2 ">
+							<span className="text-3xl font-medium">Site Grade</span>
+							<span className="text-2xl text-[#6D706F]">
+								{currentAudit?.billboardEvaluation?.siteGrade ?? "N/A"}
+							</span>
+						</div>
 					</div>
 					<div className=" bg-white rounded-2xl flex flex-col">
 						<div className="px-5 py-6 flex flex-col gap-2">
 							<span className="text-3xl font-medium">Object Counts</span>
 							<div className="flex flex-col mt-5">
-								{Object.keys(currentAudit?.objectCounts ?? {}).map((k, i) => (
-									<div
-										key={i}
-										className="flex items-center justify-between py-5 border-b border-b-[#E3E3E3] last:border-b-0">
-										<span className="text-2xl font-medium">{k}</span>
-										<span className="text-2xl text-[#6D706F] font-medium">
-											{currentAudit?.objectCounts[k]}
-										</span>
-									</div>
-								))}
+								{objectCounts.length > 0 &&
+									objectCounts.map((k, i) => {
+										return (
+											<div
+												key={i}
+												className="flex items-center justify-between py-5 border-b border-b-[#E3E3E3] last:border-b-0">
+												<span className="text-2xl font-medium">{k}</span>
+												<span className="text-2xl text-[#6D706F] font-medium">
+													{currentAudit?.objectCounts[k]}
+												</span>
+											</div>
+										);
+									})}
+
+								{objectCounts.length === 0 && (
+									<span className="text-2xl text-[#6D706F] font-medium">
+										No Match Found!
+									</span>
+								)}
 							</div>
 						</div>
 					</div>
