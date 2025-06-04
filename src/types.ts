@@ -125,6 +125,14 @@ export interface Reaudit {
 		boardConditionId: number;
 		evaluationTimeId: number;
 		posterConditionId: number;
+		billboardType: BillboardType;
+		advertiser: Advertiser;
+		industry: Industry;
+		category: Category;
+		boardCondition: BoardCondition;
+		posterCondition: PosterCondition;
+		trafficSpeed: TrafficSpeed;
+		evaluationTime: EvaluationTime;
 	};
 	createdAt: Date;
 	status: string;
