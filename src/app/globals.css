@@ -5,7 +5,6 @@
 	--font-barlow: var(--font-barlow);
 	--color-secondary: #00100a;
 	--color-textBlack: #1e1e1e;
-	
 }
 
 html {
@@ -78,5 +77,15 @@ html {
 
 	100% {
 		transform: translate(24px, 0);
+	}
+}
+
+.spin {
+	animation: loaderspin 0.3s linear infinite;
+}
+
+@keyframes loaderspin {
+	100% {
+		transform: rotate(360deg);
 	}
 }

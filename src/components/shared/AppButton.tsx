@@ -1,16 +1,16 @@
 "use client";
 import React, { PropsWithChildren } from "react";
 import AppLoader from "./AppLoader";
-import { motion } from "framer-motion";
+import { motion, HTMLMotionProps } from "framer-motion";
 
-type AppButtonProps = {
+interface AppButtonProps extends HTMLMotionProps<"button"> {
 	label?: string;
 	showLoading?: boolean;
 	type?: "submit" | "button" | "reset";
 	fullyRounded?: boolean;
 	className?: string;
 	onClick?: () => void;
-} & PropsWithChildren;
+}
 
 function AppButton({
 	label,
@@ -21,7 +21,7 @@ function AppButton({
 	children,
 	onClick,
 	...otherProps
-}: AppButtonProps) {
+}: AppButtonProps & PropsWithChildren) {
 	return (
 		<motion.button
 			whileTap={{ scale: 0.87, transition: { ease: "linear" } }}

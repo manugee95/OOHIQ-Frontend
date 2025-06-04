@@ -8,13 +8,17 @@ import { ApiInstance } from "@/utils";
 import { Audit } from "@/types";
 import Pagination from "@/components/shared/Pagination";
 import AuditTableActions from "./AuditTableActions";
+import { useRootStore } from "@/components/shared/providers/RootProvider";
 
 export default function AuditsTable() {
+	const { currentCountry } = useRootStore();
 	const [currentPage, setCurrentPage] = useState(1);
 	const { data, isLoading } = useQuery({
-		queryKey: ["audits", currentPage],
+		queryKey: ["audits", currentPage, currentCountry],
 		queryFn: async function () {
-			const response = await ApiInstance.get("/audits?page=" + currentPage);
+			const response = await ApiInstance.get(
+				`/audits?page=${currentPage}&country=${currentCountry?.name}`
+			);
 			return response.data;
 		},
 		retry: false,
@@ -99,13 +103,6 @@ export default function AuditsTable() {
 									<tr key={i} className="border-b border-b-[#B7B7B7]">
 										<td>
 											<div className="flex items-center gap-5 p-5">
-												<Image
-													src={d.user.profilePicture}
-													alt="OOHIQ"
-													width={50}
-													height={50}
-													className="w-[50px] h-[50px] rounded-full object-cover object-top"
-												/>
 												<span className="font-medium text-2xl text-secondary">
 													{d.user.fullName}
 												</span>
@@ -129,15 +126,15 @@ export default function AuditsTable() {
 											<div className="p-5">
 												<AppButton
 													className={`${
-														d.status === "approved"
+														d.status.toLocaleLowerCase() === "approved"
 															? "!bg-[#1AED0830] border-[#096102] !text-[#096102]"
 															: ""
 													} ${
-														d.status === "pending"
+														d.status.toLocaleLowerCase() === "pending"
 															? "!bg-[#ed8e0830] border-[#613d02] !text-[#613d02]"
 															: ""
 													} ${
-														d.status === "disapproved"
+														d.status.toLocaleLowerCase() === "disapproved"
 															? "!bg-[#FF5E5E30] border-[#FF5E5E] !text-[#FF5E5E]"
 															: ""
 													} !w-[108px]   border`}
@@ -160,11 +157,13 @@ export default function AuditsTable() {
 										</td>
 										<td>
 											<div className="p-5">
-												<AppButton
-													fullyRounded
-													className="!bg-[#3DF3A92B] !w-[108px] !text-secondary border-primary border"
-													label="View"
-												/>
+												<Link href={"/audits/" + d.id}>
+													<AppButton
+														fullyRounded
+														className="!bg-[#3DF3A92B] !w-[108px] !text-secondary border-primary border"
+														label="View"
+													/>
+												</Link>
 											</div>
 										</td>
 									</tr>

@@ -37,7 +37,7 @@ export default function LoginForm() {
 		{ setSubmitting }: FormikHelpers<LoginData>
 	) {
 		try {
-			const response = await ApiInstance.post("/login", values);
+			const response = await ApiInstance.post("/api/web-login", values);
 			await setAccessToken(response.data.token);
 
 			showAndHideAlert({

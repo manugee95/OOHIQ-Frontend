@@ -7,6 +7,7 @@ import SidePanel from "@/components/shared/SidePanel";
 import Alert from "@/components/shared/Alert";
 import { ApiInstance } from "@/utils";
 import DashboardHeader from "@/components/shared/DashboardHeader";
+import { redirect } from "next/navigation";
 
 const barlow = Barlow({
 	variable: "--font-barlow",
@@ -24,12 +25,23 @@ export default async function RootLayout({
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
-	const res = await ApiInstance.get("/user/detail");
+	let user: any = null;
+	let countries = [];
+
+	try {
+		const res = await ApiInstance.get("/user/detail");
+		user = res.data;
+
+		const countriesRes = await ApiInstance.get("/api/get-countries");
+		countries = countriesRes.data;
+	} catch (error) {
+		return redirect("/login");
+	}
 
 	return (
 		<html lang="en">
 			<body className={`${barlow.variable} font-barlow antialiased`}>
-				<RootProvider user={res.data ?? null}>
+				<RootProvider user={user} countries={countries}>
 					<NextTopLoader
 						color="#00100a"
 						shadow="0 0 10px #00100a,0 0 5px #00100a"
