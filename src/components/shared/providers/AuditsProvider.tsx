@@ -7,15 +7,15 @@ import { Audit, Reaudit } from "@/types";
 interface AuditsStore {
 	currentAudit: Audit | null;
 	setCurrentAudit: (val: Audit | null) => void;
-	currentReaudit: Audit | null;
-	setCurrentReaudit: (val: Audit | null) => void;
+	currentReaudit: Reaudit | null;
+	setCurrentReaudit: (val: Reaudit | null) => void;
 }
 
 const AuditsContext = createContext<StoreApi<AuditsStore> | null>(null);
 
 const createAuditsStore = (
 	currentAudit: Audit | null,
-	currentReaudit: Audit | null
+	currentReaudit: Reaudit | null
 ) =>
 	createStore<AuditsStore>()((set) => ({
 		currentAudit: currentAudit,
@@ -31,7 +31,7 @@ const AuditsProvider = ({
 	currentReaudit = null,
 }: PropsWithChildren & {
 	currentAudit?: Audit | null;
-	currentReaudit?: Audit | null;
+	currentReaudit?: Reaudit | null;
 }) => {
 	const AuditsStoreRef = useRef<StoreApi<AuditsStore> | null>(null);
 	AuditsStoreRef.current = createAuditsStore(currentAudit, currentReaudit);

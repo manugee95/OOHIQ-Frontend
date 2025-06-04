@@ -65,7 +65,7 @@ export default function ReauditDetails() {
 		<>
 			<div className="flex items-center justify-between mb-12">
 				<h1 className="text-[25px] font-semibold">
-					{currentReaudit?.boardCode}
+					{currentReaudit?.audit?.boardCode}
 				</h1>
 				<div className="flex items-center gap-2">
 					{["disapproved", "pending"].includes(
@@ -106,7 +106,7 @@ export default function ReauditDetails() {
 								className="w-full h-full"
 								controls
 								muted
-								src={currentReaudit?.videoUrl}></video>
+								src={currentReaudit?.data.videoUrl}></video>
 						</div>
 					</div>
 					<div className="w-full bg-white p-8  flex flex-col rounded-2xl">
@@ -114,13 +114,13 @@ export default function ReauditDetails() {
 							<h4 className="text-3xl font-semibold">Close Shot</h4>
 						</div>
 						<div className="w-full h-[500px]">
-							{currentReaudit?.closeShotUrl && (
+							{currentReaudit?.data?.closeShotUrl && (
 								<Image
 									className="w-full h-full object-scale-down"
 									width={500}
 									height={500}
 									alt="OOHIQ"
-									overrideSrc={currentReaudit?.closeShotUrl}
+									overrideSrc={currentReaudit?.data?.closeShotUrl}
 									src={""}
 								/>
 							)}
@@ -131,13 +131,13 @@ export default function ReauditDetails() {
 							<h4 className="text-3xl font-semibold">Long Shot</h4>
 						</div>
 						<div className="w-full h-[500px]">
-							{currentReaudit?.longShotUrl && (
+							{currentReaudit?.data?.longShotUrl && (
 								<Image
 									className="w-full h-full object-scale-down"
 									width={500}
 									height={500}
 									alt="OOHIQ"
-									overrideSrc={currentReaudit.longShotUrl}
+									overrideSrc={currentReaudit.data?.longShotUrl}
 									src={""}
 								/>
 							)}
@@ -162,13 +162,13 @@ export default function ReauditDetails() {
 						<div className="px-5 py-6 flex flex-col gap-2 border-b border-b-[#E3E3E3]">
 							<span className="text-3xl font-medium">Location</span>
 							<span className="text-2xl text-[#6D706F">
-								{currentReaudit?.location ?? "N/A"}
+								{currentReaudit?.audit.location ?? "N/A"}
 							</span>
 						</div>
 						<div className="px-5 py-6 flex flex-col gap-2 border-b border-b-[#E3E3E3]">
 							<span className="text-3xl font-medium">Billboard Type</span>
 							<span className="text-2xl text-[#6D706F">
-								{currentReaudit?.billboardType?.name ?? "N/A"}
+								{currentReaudit?.data.billboardType?.name ?? "N/A"}
 							</span>
 						</div>
 						<div className="px-5 py-6 flex flex-col gap-2 border-b border-b-[#E3E3E3]">
@@ -210,55 +210,49 @@ export default function ReauditDetails() {
 						<div className="px-5 py-6 flex flex-col gap-2 border-b border-b-[#E3E3E3]">
 							<span className="text-3xl font-medium">Industry</span>
 							<span className="text-2xl text-[#6D706F]">
-								{currentReaudit?.industry.name}
+								{currentReaudit?.data.industry?.name}
 							</span>
 						</div>
 						<div className="px-5 py-6 flex flex-col gap-2 border-b border-b-[#E3E3E3]">
 							<span className="text-3xl font-medium">Advertiser</span>
 							<span className="text-2xl text-[#6D706F">
-								{currentReaudit?.advertiser?.name ?? "N/A"}
+								{currentReaudit?.data.advertiser?.name ?? "N/A"}
 							</span>
 						</div>
 						<div className="px-5 py-6 flex flex-col gap-2 border-b border-b-[#E3E3E3]">
 							<span className="text-3xl font-medium">Brand</span>
 							<span className="text-2xl text-[#6D706F">
-								{currentReaudit?.brand ?? "N/A"}
+								{currentReaudit?.data.brand ?? "N/A"}
 							</span>
 						</div>
 						<div className="px-5 py-6 flex flex-col gap-2 border-b border-b-[#E3E3E3]">
 							<span className="text-3xl font-medium">Board Condition</span>
 							<span className="text-2xl text-[#6D706F">
-								{currentReaudit?.boardCondition?.name ?? "N/A"}
+								{currentReaudit?.data.boardCondition?.name ?? "N/A"}
 							</span>
 						</div>
 						<div className="px-5 py-6 flex flex-col gap-2 border-b border-b-[#E3E3E3]">
 							<span className="text-3xl font-medium">Poster Condition</span>
 							<span className="text-2xl text-[#6D706F">
-								{currentReaudit?.posterCondition?.name ?? "N/A"}
+								{currentReaudit?.data.posterCondition?.name ?? "N/A"}
 							</span>
 						</div>
 						<div className="px-5 py-6 flex flex-col gap-2 border-b border-b-[#E3E3E3]">
 							<span className="text-3xl font-medium">Traffic Speed</span>
 							<span className="text-2xl text-[#6D706F">
-								{currentReaudit?.trafficSpeed?.name ?? "N/A"}
+								{currentReaudit?.data.trafficSpeed?.name ?? "N/A"}
 							</span>
 						</div>
 						<div className="px-5 py-6 flex flex-col gap-2 border-b border-b-[#E3E3E3]">
 							<span className="text-3xl font-medium">Evaluation Time</span>
 							<span className="text-2xl text-[#6D706F">
-								{currentReaudit?.evaluationTime?.name ?? "N/A"}
+								{currentReaudit?.data.evaluationTime?.name ?? "N/A"}
 							</span>
 						</div>
 						<div className="px-5 py-6 flex flex-col gap-2 border-b border-b-[#E3E3E3]">
 							<span className="text-3xl font-medium">Impression Score</span>
 							<span className="text-2xl text-[#6D706F]">
-								{currentReaudit?.impressionScore}
-							</span>
-						</div>
-						<div className="px-5 py-6 flex flex-col gap-2 ">
-							<span className="text-3xl font-medium">SOV Score</span>
-							<span className="text-2xl text-[#6D706F]">
-								{currentReaudit?.sovScore ?? "N/A"}
+								{currentReaudit?.data.impressionScore}
 							</span>
 						</div>
 					</div>
@@ -266,16 +260,18 @@ export default function ReauditDetails() {
 						<div className="px-5 py-6 flex flex-col gap-2">
 							<span className="text-3xl font-medium">Object Counts</span>
 							<div className="flex flex-col mt-5">
-								{Object.keys(currentReaudit?.objectCounts ?? {}).map((k, i) => (
-									<div
-										key={i}
-										className="flex items-center justify-between py-5 border-b border-b-[#E3E3E3] last:border-b-0">
-										<span className="text-2xl font-medium">{k}</span>
-										<span className="text-2xl text-[#6D706F] font-medium">
-											{currentReaudit?.objectCounts[k]}
-										</span>
-									</div>
-								))}
+								{Object.keys(currentReaudit?.data.objectCounts ?? {}).map(
+									(k, i) => (
+										<div
+											key={i}
+											className="flex items-center justify-between py-5 border-b border-b-[#E3E3E3] last:border-b-0">
+											<span className="text-2xl font-medium">{k}</span>
+											<span className="text-2xl text-[#6D706F] font-medium">
+												{currentReaudit?.data.objectCounts[k]}
+											</span>
+										</div>
+									)
+								)}
 							</div>
 						</div>
 					</div>

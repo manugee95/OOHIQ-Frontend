@@ -11,19 +11,19 @@ export default async function layout({
 } & PropsWithChildren) {
 	const { reauditId } = await params;
 
-	let audit: Audit | null = null;
+	let audit: Reaudit | null = null;
 
 	console.log(reauditId);
 
 	try {
 		const res = await ApiInstance.get(`/api/view-reaudit/${reauditId}`);
-		audit = res.data.audit;
+		audit = res.data;
 	} catch (error) {
 		audit = null;
 		console.log(error);
 	}
 
-	console.log(audit, "jk");
+	console.log(audit, "jkiiie");
 
 	return <AuditsProvider currentReaudit={audit}>{children}</AuditsProvider>;
 }
