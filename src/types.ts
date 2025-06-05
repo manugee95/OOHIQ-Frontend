@@ -56,9 +56,52 @@ interface EvaluationTime {
 }
 
 interface BillboardEvaluation {
+	id: number;
+	auditId: number;
+	boardNo: string | null;
+	contractorName: string;
+	phone: string;
+	uploadedBy: number;
+
 	ltsScore: number;
 	siteScore: number;
 	siteGrade: string;
+
+	boardLevelId: number;
+	boardLevel: { name: string };
+
+	boardPositioningId: number;
+	boardPositioning: { name: string };
+
+	distanceOfVisibilityId: number;
+	distanceOfVisibility: { name: string };
+
+	noOfBoardsInViewId: number;
+	noOfBoardsInView: { name: string };
+
+	noOfCompetitiveBoardsId: number;
+	noOfCompetitiveBoards: { name: string };
+
+	noOfLargerBoardsId: number;
+	noOfLargerBoards: { name: string };
+
+	pedestrianTrafficId: number;
+	pedestrianTraffic: { name: string };
+
+	vehicularTrafficId: number;
+	vehicularTraffic: { name: string };
+
+	roadTypeId: number;
+	roadType: { name: string };
+
+	specialFeaturesId: number;
+	specialFeatures: { name: string };
+
+	visibilityPointsId: number;
+	visibilityPoints: { name: string };
+
+	createdAt: string;
+	updatedAt: string;
 }
 
 interface ObjectCounts {
