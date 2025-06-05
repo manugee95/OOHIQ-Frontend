@@ -94,7 +94,7 @@ export const SidePanelContent = function ({ cb }: { cb?: () => void }) {
 							cb();
 						}
 					}}
-					href={"/locations"}
+					href={"/boards"}
 					className={`flex items-center gap-5 h-[40px] rounded-lg px-5 ${
 						isLocations ? "bg-primary" : "bg-transparent"
 					}`}>
@@ -176,24 +176,6 @@ export const SidePanelContent = function ({ cb }: { cb?: () => void }) {
 							isWithdrawals ? "text-secondary" : "text-[#6D706F]"
 						} text-2xl xl:text-3xl font-medium`}>
 						Withdrawals
-					</span>
-				</Link>
-				<Link
-					onClick={() => {
-						if (cb) {
-							cb();
-						}
-					}}
-					href={"/auditors"}
-					className={`flex items-center gap-5 h-[40px] rounded-lg px-5 ${
-						isAuditors ? "bg-primary" : "bg-transparent"
-					}`}>
-					<AdvertisersIcon fill={isAuditors ? "#00100a" : "#6D706F"} />
-					<span
-						className={`${
-							isAuditors ? "text-secondary" : "text-[#6D706F]"
-						} text-2xl xl:text-3xl font-medium`}>
-						Field Auditors
 					</span>
 				</Link>
 			</div>

@@ -1,4 +1,4 @@
-import LocationsList from "@/components/pages/locations/LocationsList";
+import LocationsList from "@/components/pages/boards/LocationsList";
 import React from "react";
 
 export default function page() {

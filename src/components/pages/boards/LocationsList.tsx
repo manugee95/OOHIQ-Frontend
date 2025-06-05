@@ -10,7 +10,7 @@ export default function LocationsList() {
 	const [currentPage, setCurrentPage] = useState(1);
 	const { currentCountry } = useRootStore();
 
-	const { data, isLoading } = useQuery({
+	const { data, isLoading, isFetching } = useQuery({
 		queryKey: ["pending-audits", currentPage, currentCountry],
 		queryFn: async function () {
 			const response = await ApiInstance.get(
@@ -22,7 +22,7 @@ export default function LocationsList() {
 		gcTime: 0,
 	});
 
-	if (isLoading && !data) {
+	if ((isLoading || isFetching)) {
 		return (
 			<div className="w-full flex flex-col gap-y-8 fle items-center justify-center min-h-screen">
 				<AppLoader />;
@@ -30,14 +30,14 @@ export default function LocationsList() {
 		);
 	}
 
-	console.log(data);
-
 	return (
 		<div className="w-full flex flex-col gap-y-8">
 			<div className="mt-8 grid grid-cols-3 gap-5">
-				{data.boards.map((d: any, i: number) => (
-					<LocationCard item={d} key={i} />
-				))}
+				{(!isLoading || !isFetching) &&
+					data &&
+					data?.boards?.map((d: any, i: number) => (
+						<LocationCard item={d} key={i} />
+					))}
 			</div>
 		</div>
 	);

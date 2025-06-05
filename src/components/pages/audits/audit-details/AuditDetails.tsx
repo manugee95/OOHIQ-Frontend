@@ -305,6 +305,110 @@ export default function AuditDetails() {
 								{currentAudit?.billboardEvaluation?.siteGrade ?? "N/A"}
 							</span>
 						</div>
+						<div className="px-5 py-6 flex flex-col gap-2 border-b border-b-[#E3E3E3]">
+							<span className="text-3xl font-medium">Board Level</span>
+							<span className="text-2xl text-[#6D706F]">
+								{currentAudit?.billboardEvaluation?.siteGrade ?? "N/A"}
+							</span>
+						</div>
+						<div className="px-5 py-6 flex flex-col gap-2 border-b border-b-[#E3E3E3]">
+							<span className="text-3xl font-medium">Board Positioning</span>
+							<span className="text-2xl text-[#6D706F]">
+								{currentAudit?.billboardEvaluation?.boardPositioning?.name ??
+									"N/A"}
+							</span>
+						</div>
+
+						<div className="px-5 py-6 flex flex-col gap-2 border-b border-b-[#E3E3E3]">
+							<span className="text-3xl font-medium">
+								Distance of Visibility
+							</span>
+							<span className="text-2xl text-[#6D706F]">
+								{currentAudit?.billboardEvaluation?.distanceOfVisibility
+									?.name ?? "N/A"}
+							</span>
+						</div>
+
+						<div className="px-5 py-6 flex flex-col gap-2 border-b border-b-[#E3E3E3]">
+							<span className="text-3xl font-medium">
+								No. of Boards in View
+							</span>
+							<span className="text-2xl text-[#6D706F]">
+								{currentAudit?.billboardEvaluation?.noOfBoardsInView?.name ??
+									"N/A"}
+							</span>
+						</div>
+
+						<div className="px-5 py-6 flex flex-col gap-2 border-b border-b-[#E3E3E3]">
+							<span className="text-3xl font-medium">
+								No. of Competitive Boards
+							</span>
+							<span className="text-2xl text-[#6D706F]">
+								{currentAudit?.billboardEvaluation?.noOfCompetitiveBoards
+									?.name ?? "N/A"}
+							</span>
+						</div>
+
+						<div className="px-5 py-6 flex flex-col gap-2 border-b border-b-[#E3E3E3]">
+							<span className="text-3xl font-medium">No. of Larger Boards</span>
+							<span className="text-2xl text-[#6D706F]">
+								{currentAudit?.billboardEvaluation?.noOfLargerBoards?.name ??
+									"N/A"}
+							</span>
+						</div>
+
+						<div className="px-5 py-6 flex flex-col gap-2 border-b border-b-[#E3E3E3]">
+							<span className="text-3xl font-medium">Pedestrian Traffic</span>
+							<span className="text-2xl text-[#6D706F]">
+								{currentAudit?.billboardEvaluation?.pedestrianTraffic?.name ??
+									"N/A"}
+							</span>
+						</div>
+
+						<div className="px-5 py-6 flex flex-col gap-2 border-b border-b-[#E3E3E3]">
+							<span className="text-3xl font-medium">Vehicular Traffic</span>
+							<span className="text-2xl text-[#6D706F]">
+								{currentAudit?.billboardEvaluation?.vehicularTraffic?.name ??
+									"N/A"}
+							</span>
+						</div>
+
+						<div className="px-5 py-6 flex flex-col gap-2 border-b border-b-[#E3E3E3]">
+							<span className="text-3xl font-medium">Road Type</span>
+							<span className="text-2xl text-[#6D706F]">
+								{currentAudit?.billboardEvaluation?.roadType?.name ?? "N/A"}
+							</span>
+						</div>
+
+						<div className="px-5 py-6 flex flex-col gap-2 border-b border-b-[#E3E3E3]">
+							<span className="text-3xl font-medium">Special Features</span>
+							<span className="text-2xl text-[#6D706F]">
+								{currentAudit?.billboardEvaluation?.specialFeatures?.name ??
+									"N/A"}
+							</span>
+						</div>
+
+						<div className="px-5 py-6 flex flex-col gap-2 border-b border-b-[#E3E3E3]">
+							<span className="text-3xl font-medium">Visibility Points</span>
+							<span className="text-2xl text-[#6D706F]">
+								{currentAudit?.billboardEvaluation?.visibilityPoints?.name ??
+									"N/A"}
+							</span>
+						</div>
+
+						<div className="px-5 py-6 flex flex-col gap-2 border-b border-b-[#E3E3E3]">
+							<span className="text-3xl font-medium">Contractor Name</span>
+							<span className="text-2xl text-[#6D706F]">
+								{currentAudit?.billboardEvaluation?.contractorName ?? "N/A"}
+							</span>
+						</div>
+
+						<div className="px-5 py-6 flex flex-col gap-2">
+							<span className="text-3xl font-medium">Phone</span>
+							<span className="text-2xl text-[#6D706F]">
+								{currentAudit?.billboardEvaluation?.phone ?? "N/A"}
+							</span>
+						</div>
 					</div>
 					<div className=" bg-white rounded-2xl flex flex-col">
 						<div className="px-5 py-6 flex flex-col gap-2">

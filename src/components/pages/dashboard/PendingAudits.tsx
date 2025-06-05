@@ -13,7 +13,7 @@ export default function PendingAudits() {
 	const [currentPage, setCurrentPage] = useState(1);
 	const { currentCountry } = useRootStore();
 
-	const { data, isLoading } = useQuery({
+	const { data, isLoading, isFetching } = useQuery({
 		queryKey: ["pending-audits", currentPage, currentCountry],
 		queryFn: async function () {
 			const response = await ApiInstance.get(
@@ -70,7 +70,7 @@ export default function PendingAudits() {
 						</tr>
 					</thead>
 					<tbody>
-						{isLoading &&
+						{(isLoading || isFetching) &&
 							[1, 2, 3, 4].map((d, i) => (
 								<tr key={i} className="border-b border-b-[#B7B7B7]">
 									<td>
@@ -108,8 +108,9 @@ export default function PendingAudits() {
 									</td>
 								</tr>
 							))}
-						{!isLoading &&
+						{(!isLoading || !isFetching) &&
 							data &&
+							data.pendingAudits &&
 							data.pendingAudits.map((d: Audit, i: number) => (
 								<tr key={i} className="border-b border-b-[#B7B7B7]">
 									<td>
