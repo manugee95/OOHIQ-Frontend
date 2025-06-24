@@ -8,6 +8,7 @@ export interface User {
 	auditCount: number;
 	task: number;
 	walletBalance: number;
+	approvedAudits: number;
 	[key: string]: string | number | any;
 }
 

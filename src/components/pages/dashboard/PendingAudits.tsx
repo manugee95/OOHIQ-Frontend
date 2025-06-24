@@ -108,7 +108,8 @@ export default function PendingAudits() {
 									</td>
 								</tr>
 							))}
-						{(!isLoading || !isFetching) &&
+						{!isLoading &&
+							!isFetching &&
 							data &&
 							data.pendingAudits &&
 							data.pendingAudits.map((d: Audit, i: number) => (
