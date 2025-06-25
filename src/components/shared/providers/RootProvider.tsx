@@ -4,7 +4,7 @@ import { createStore, StoreApi } from "zustand/vanilla";
 import { useStore } from "zustand";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Alert from "../Alert";
-import { User } from "@/types";
+import { Campaign, User } from "@/types";
 
 export interface Alert {
 	show?: boolean;
@@ -26,6 +26,8 @@ interface RootStore {
 	setCountries: (val: Country[]) => void;
 	currentCountry: Country | null;
 	setCurrentCountry: (val: Country) => void;
+	currentCampaign: Campaign | null;
+	setCurrentCampaign: (val: Campaign | null) => void;
 }
 
 const RootContext = createContext<StoreApi<RootStore> | null>(null);
@@ -46,6 +48,9 @@ const createRootStore = (user: User | null, countries: Country[]) =>
 		setCountries: (val) => set((state) => ({ ...state, countries: val })),
 		setAlert: (val) => set((state) => ({ ...state, alert: val })),
 		setUserDetails: (val) => set((state) => ({ ...state, userDetails: val })),
+		currentCampaign: null,
+		setCurrentCampaign: (val) =>
+			set((state) => ({ ...state, currentCampaign: val })),
 	}));
 
 const RootProvider = ({

@@ -40,7 +40,7 @@ export default async function RootLayout({
 
 	return (
 		<html lang="en">
-			<body className={`${barlow.variable} font-barlow antialiased`}>
+			<body id="body" className={`${barlow.variable} font-barlow antialiased`}>
 				<RootProvider user={user} countries={countries}>
 					<NextTopLoader
 						color="#00100a"

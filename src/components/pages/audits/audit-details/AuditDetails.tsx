@@ -236,13 +236,13 @@ export default function AuditDetails() {
 						<div className="px-5 py-6 flex flex-col gap-2 border-b border-b-[#E3E3E3]">
 							<span className="text-3xl font-medium">Industry</span>
 							<span className="text-2xl text-[#6D706F]">
-								{currentAudit?.industry.name}
+								{currentAudit?.industry?.name}
 							</span>
 						</div>
 						<div className="px-5 py-6 flex flex-col gap-2 border-b border-b-[#E3E3E3]">
 							<span className="text-3xl font-medium">Advertiser</span>
 							<span className="text-2xl text-[#6D706F]">
-								{currentAudit?.advertiser.name}
+								{currentAudit?.advertiser?.name}
 							</span>
 						</div>
 						<div className="px-5 py-6 flex flex-col gap-2 border-b border-b-[#E3E3E3]">

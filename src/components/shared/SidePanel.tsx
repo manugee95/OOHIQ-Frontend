@@ -30,7 +30,7 @@ export const SidePanelContent = function ({ cb }: { cb?: () => void }) {
 	const isAudits = pathname.startsWith("/audits");
 	const isWithdrawals = pathname.startsWith("/withdrawals");
 	const isAuditors = pathname.startsWith("/auditors");
-	const isLocations = pathname.startsWith("/locations");
+	const isLocations = pathname.startsWith("/boards");
 	const isCampaigns = pathname.startsWith("/campaigns");
 	const isManageUsers = pathname.startsWith("/manage-users");
 	const isReports = pathname.startsWith("/reports");
@@ -112,7 +112,7 @@ export const SidePanelContent = function ({ cb }: { cb?: () => void }) {
 							cb();
 						}
 					}}
-					href={"/locations"}
+					href={"/campaigns"}
 					className={`flex items-center gap-5 h-[40px] rounded-lg px-5 ${
 						isCampaigns ? "bg-primary" : "bg-transparent"
 					}`}>
@@ -130,7 +130,7 @@ export const SidePanelContent = function ({ cb }: { cb?: () => void }) {
 							cb();
 						}
 					}}
-					href={"/locations"}
+					href={"/manage-users"}
 					className={`flex items-center gap-5 h-[40px] rounded-lg px-5 ${
 						isManageUsers ? "bg-primary" : "bg-transparent"
 					}`}>

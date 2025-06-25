@@ -5,19 +5,28 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { ApiInstance } from "@/utils";
-import { Audit, Reaudit } from "@/types";
+import { Audit, User } from "@/types";
 import Pagination from "@/components/shared/Pagination";
 import { useRootStore } from "@/components/shared/providers/RootProvider";
+import Kebab from "@/components/shared/icons/Kebab";
 
-export default function PendingReaudits() {
+export const levels: { [key: string]: string } = {
+	Rookie: "/Rookie.svg",
+	Challenger: "/Challenger.svg",
+	Professional: "/Professional.svg",
+	Ultimate: "/Ultimate.svg",
+	Contender: "/Contender.svg",
+};
+
+export default function FieldAuditorsList() {
 	const [currentPage, setCurrentPage] = useState(1);
 	const { currentCountry } = useRootStore();
 
 	const { data, isLoading, isFetching } = useQuery({
-		queryKey: ["pending-reaudits", currentPage, currentCountry],
+		queryKey: ["pending-audits", currentPage, currentCountry],
 		queryFn: async function () {
 			const response = await ApiInstance.get(
-				`/api/pending-reaudits?page=${currentPage}&country=${currentCountry?.name}`
+				`/user/field-auditor?page=${currentPage}&country=${currentCountry?.name}`
 			);
 			return response.data;
 		},
@@ -28,14 +37,9 @@ export default function PendingReaudits() {
 	return (
 		<div className="overflow-hidden w-full min-h-[70vh] rounded-2xl bg-white mt-8 flex flex-col">
 			<div className="flex items-center justify-between p-8">
-				<span className="text-[2rem] font-semibold text-textBlack">
-					Pending Re-Audits
+				<span className="text-[3rem] font-bold text-textBlack">
+					Field Auditors
 				</span>
-				<Link
-					href={"/audits"}
-					className="text-2xl font-medium text-textBlack underline">
-					View all
-				</Link>
 			</div>
 			<div className="w-full grow overflow-auto">
 				<table className="w-full">
@@ -48,30 +52,24 @@ export default function PendingReaudits() {
 							</th>
 							<th>
 								<span className="text-2xl font-semibold text-[#B0B0B0] p-5 flex">
-									Location
+									Email
 								</span>
 							</th>
 							<th>
 								<span className="text-2xl font-semibold text-[#B0B0B0] p-5 flex">
-									Brand
+									Approved Audits
 								</span>
 							</th>
 							<th className="text-center">
 								<span className="text-2xl font-semibold text-[#B0B0B0] p-5 flex">
-									Status
-								</span>
-							</th>
-							<th>
-								<span className="text-2xl font-semibold text-[#B0B0B0] p-5 flex">
-									Date Uploaded
+									Level
 								</span>
 							</th>
 							<th className="text-right"></th>
 						</tr>
 					</thead>
 					<tbody>
-						{isLoading &&
-							isFetching &&
+						{(isLoading || isFetching) &&
 							[1, 2, 3, 4].map((d, i) => (
 								<tr key={i} className="border-b border-b-[#B7B7B7]">
 									<td>
@@ -96,87 +94,64 @@ export default function PendingReaudits() {
 										</div>
 									</td>
 									<td>
-										<div className="p-5 w-[170px]">
-											<div className="p-5">
-												<div className="w-[80px] rounded-full h-[5px] bg-[#eaeaea] animate-pulse"></div>
-											</div>
-										</div>
-									</td>
-									<td>
 										<div className="p-5">
 											<div className="bg-[#eaeaea] animate-pulse w-[109px] h-[50px] rounded-full object-cover object-top"></div>
 										</div>
 									</td>
 								</tr>
 							))}
-						{(!isLoading || !isFetching) &&
+						{!isLoading &&
+							!isFetching &&
 							data &&
-							data.pendingReaudits &&
-							data.pendingReaudits.map((d: Reaudit, i: number) => (
+							data.auditors &&
+							data.auditors.map((d: User, i: number) => (
 								<tr key={i} className="border-b border-b-[#B7B7B7]">
 									<td>
 										<div className="flex items-center gap-5 p-5">
+											<Image
+												width={50}
+												height={50}
+												src={d.profilePicture}
+												alt="OOHIQ"
+												className="rounded-full"
+											/>
 											<span className="font-medium text-2xl text-secondary">
-												{d.user.fullName}
+												{d.fullName}
 											</span>
 										</div>
 									</td>
 									<td>
 										<div className="p-5 w-[170px]">
 											<span className="line-clamp-2 font-medium text-2xl text-secondary">
-												{d.audit.location}
+												{d.email}
 											</span>
 										</div>
 									</td>
 									<td>
 										<div className="p-5">
 											<span className="font-medium text-2xl text-secondary">
-												{d.data.brand}
+												{d.approvedAudits}
 											</span>
+										</div>
+									</td>
+									<td>
+										<div className="p-5 flex items-center text-2xl gap-3 font-medium">
+											<Image
+												width={20}
+												height={20}
+												src={levels[d.level]}
+												alt="OOHIQ"
+											/>
+											<span>{d.level}</span>
 										</div>
 									</td>
 									<td>
 										<div className="p-5">
 											<AppButton
-												className={`${
-													d.status.toLocaleLowerCase() === "approved"
-														? "!bg-[#1AED0830] border-[#096102] !text-[#096102]"
-														: ""
-												} ${
-													d.status.toLocaleLowerCase() === "pending"
-														? "!bg-[#ed8e0830] border-[#613d02] !text-[#613d02]"
-														: ""
-												} ${
-													d.status.toLocaleLowerCase() === "disapproved"
-														? "!bg-[#FF5E5E30] border-[#FF5E5E] !text-[#FF5E5E]"
-														: ""
-												} !w-[108px]   border`}
-												label={d.status}
-											/>
-										</div>
-									</td>
-									<td>
-										<div className="p-5 w-[170px]">
-											<div className="p-5">
-												<span className="line-clamp-2 font-medium text-2xl text-secondary">
-													{new Date(d.createdAt).toLocaleDateString("en-US", {
-														month: "short",
-														day: "2-digit",
-														year: "numeric",
-													})}
-												</span>
-											</div>
-										</div>
-									</td>
-									<td>
-										<div className="p-5">
-											<Link href={"/audits/reaudits/" + d.id}>
-												<AppButton
-													fullyRounded
-													className="!bg-[#3DF3A92B] !w-[108px] !text-secondary border-primary border"
-													label="View"
-												/>
-											</Link>
+												fullyRounded
+												className="!bg-[#3DF3A92B] !w-[108px] !text-secondary border-primary border">
+												<Kebab />
+											</AppButton>
 										</div>
 									</td>
 								</tr>
@@ -184,13 +159,13 @@ export default function PendingReaudits() {
 					</tbody>
 				</table>
 			</div>
-			{/* <div className="p-10">
+			<div className="p-10">
 				<Pagination
 					currentPage={currentPage}
 					totalPages={data?.totalPages}
 					setCurrentPage={setCurrentPage}
 				/>
-			</div> */}
+			</div>
 		</div>
 	);
 }

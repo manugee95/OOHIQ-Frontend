@@ -103,7 +103,7 @@ export default function DashboardHeader() {
 	console.log(userDetails);
 
 	return (
-		<header className="h-[100px] w-full flex items-center justify-between px-[15px]">
+		<header className="h-[100px] w-full flex items-center justify-between px-[15px] bg-white sticky top-0 mb-10 border-b border-b-[#c5c5c5] z-[50]">
 			<h1 className="font-bold text-[3.6rem]">
 				{isDashboard && "Dashboard"}
 				{isAudits && "Audits"}

@@ -13,6 +13,6 @@ export default function Portal({
 	}, []);
 
 	return mounted
-		? createPortal(children, document.getElementById(elementId)!)
+		? createPortal(children, document.querySelector("body")!)
 		: null;
 }
