@@ -191,3 +191,28 @@ export interface Reaudit {
 	audit: Audit;
 	user: User;
 }
+
+export interface Campaign {
+	id: number;
+	clientId: number;
+	siteList: Site[];
+	totalSites: number;
+	campaignId: string;
+	createdAt: string;
+	updatedAt: string;
+	client: User;
+}
+
+export interface Site {
+	code: string;
+	town: string;
+	brand: string;
+	state: string;
+	category: string;
+	latitude: string;
+	location: string;
+	boardType: string;
+	longitude: string;
+	mediaOwner: string;
+	existStatus: string;
+}

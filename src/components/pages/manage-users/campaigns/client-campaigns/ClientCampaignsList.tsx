@@ -5,12 +5,13 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { ApiInstance } from "@/utils";
-import { Audit, User } from "@/types";
+import { Audit, Campaign, User } from "@/types";
 import Pagination from "@/components/shared/Pagination";
 import { useRootStore } from "@/components/shared/providers/RootProvider";
 import Kebab from "@/components/shared/icons/Kebab";
 import Modal from "@/components/shared/Modal";
-import CreateClientForm from "./CreateClientForm";
+// import CreateClientForm from "./CreateClientForm";
+import { useParams } from "next/navigation";
 
 export const levels: { [key: string]: string } = {
 	Rookie: "/Rookie.svg",
@@ -20,20 +21,17 @@ export const levels: { [key: string]: string } = {
 	Contender: "/Contender.svg",
 };
 
-export default function ClientsList({
-	forCampaigns = false,
-}: {
-	forCampaigns?: boolean;
-}) {
+export default function ClientCampaignsList() {
 	const [currentPage, setCurrentPage] = useState(1);
-	const { currentCountry } = useRootStore();
-	const [create, setCreate] = useState(false);
+	const { currentCountry, setCurrentCampaign } = useRootStore();
+	const params = useParams();
+	const clientId = params.clientId;
 
 	const { data, isLoading, isFetching, refetch } = useQuery({
-		queryKey: ["clients-list", currentPage, currentCountry],
+		queryKey: ["client-campaigns", currentPage, currentCountry, clientId],
 		queryFn: async function () {
 			const response = await ApiInstance.get(
-				`/user/clients?page=${currentPage}&country=${currentCountry?.name}`
+				`/api/client/${clientId}/campaigns?page=${currentPage}&country=${currentCountry?.name}`
 			);
 			return response.data;
 		},
@@ -42,31 +40,17 @@ export default function ClientsList({
 		refetchOnWindowFocus: false,
 	});
 
+	console.log(data);
+
 	return (
 		<div className="overflow-hidden w-full min-h-[70vh] rounded-2xl bg-white mt-8 flex flex-col">
-			<Modal
-				showModal={create}
-				hideModal={() => {
-					setCreate(false);
-				}}>
-				<CreateClientForm
-					callback={() => {
-						setCreate(false);
-						refetch();
-					}}
-				/>
-			</Modal>
 			<div className="flex items-center justify-between p-8">
-				<span className="text-[3rem] font-bold text-textBlack">Clients</span>
-				{!forCampaigns && (
-					<AppButton
-						onClick={() => {
-							setCreate(true);
-						}}
-						className="!w-max !px-[10px] !text-secondary">
-						<span>Add New Client</span>
+				<span className="text-[3rem] font-bold text-textBlack">Campaigns</span>
+				<Link href={`/campaigns/${clientId}/create`}>
+					<AppButton className="!w-max !px-[10px] !text-secondary">
+						<span>New Campaign</span>
 					</AppButton>
-				)}
+				</Link>
 			</div>
 			<div className="w-full grow overflow-auto">
 				<table className="w-full">
@@ -80,6 +64,11 @@ export default function ClientsList({
 							<th>
 								<span className="text-2xl font-semibold text-[#B0B0B0] p-5 flex">
 									Email
+								</span>
+							</th>
+							<th>
+								<span className="text-2xl font-semibold text-[#B0B0B0] p-5 flex">
+									Total Sites
 								</span>
 							</th>
 							<th className="text-right"></th>
@@ -106,53 +95,50 @@ export default function ClientsList({
 											<div className="bg-[#eaeaea] animate-pulse w-[109px] h-[50px] rounded-full object-cover object-top"></div>
 										</div>
 									</td>
+									<td>
+										<div className="p-5"></div>
+									</td>
 								</tr>
 							))}
 						{!isLoading &&
 							!isFetching &&
 							data &&
-							data.clients &&
-							data.clients.map((d: User, i: number) => (
+							data.campaigns &&
+							data.campaigns.map((d: Campaign, i: number) => (
 								<tr key={i} className="border-b border-b-[#B7B7B7]">
 									<td>
 										<div className="flex items-center gap-5 p-5">
-											<Image
-												width={50}
-												height={50}
-												src={d.profilePicture}
-												alt="OOHIQ"
-												className="rounded-full"
-											/>
 											<span className="font-medium text-2xl text-secondary">
-												{d.fullName}
+												{d.client.fullName}
 											</span>
 										</div>
 									</td>
 									<td>
 										<div className="p-5">
 											<span className="font-medium text-2xl text-secondary">
-												{d.email}
+												{d.client.email}
 											</span>
 										</div>
 									</td>
 									<td>
 										<div className="p-5">
-											{!forCampaigns && (
+											<span className="font-medium text-2xl text-secondary">
+												{d.totalSites}
+											</span>
+										</div>
+									</td>
+									<td>
+										<div className="p-5">
+											<Link href={`/campaigns/${clientId}/details/${d.id}`}>
 												<AppButton
+													onClick={() => {
+														setCurrentCampaign(d);
+													}}
 													fullyRounded
-													className="!bg-[#3DF3A92B] !w-[108px] !text-secondary border-primary border">
-													<Kebab />
+													className="!bg-[#3DF3A92B] !w-max !px-[10px] !text-secondary border-primary border">
+													<span>View Campaign</span>
 												</AppButton>
-											)}
-											{forCampaigns && (
-												<Link href={`/campaigns/${d.id}`}>
-													<AppButton
-														fullyRounded
-														className="!bg-[#3DF3A92B] !w-max !px-[10px] !text-secondary border-primary border">
-														<span>View Campaigns</span>
-													</AppButton>
-												</Link>
-											)}
+											</Link>
 										</div>
 									</td>
 								</tr>
