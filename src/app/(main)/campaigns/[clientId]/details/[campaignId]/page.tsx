@@ -1,4 +1,4 @@
-import CampaignDetails from "@/components/pages/manage-users/campaigns/client-campaigns/details/CampaignDetails";
+import CampaignDetails from "@/components/pages/campaigns/client-campaigns/details/CampaignDetails";
 import React from "react";
 
 export default function page() {

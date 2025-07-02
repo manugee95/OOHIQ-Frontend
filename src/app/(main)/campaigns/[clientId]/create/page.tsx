@@ -1,4 +1,4 @@
-import CreateCampaign from "@/components/pages/manage-users/campaigns/client-campaigns/CreateCampaign";
+import CreateCampaign from "@/components/pages/campaigns/client-campaigns/CreateCampaign";
 import React from "react";
 
 export default function page() {
